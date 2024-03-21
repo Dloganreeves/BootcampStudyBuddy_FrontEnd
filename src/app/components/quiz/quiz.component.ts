@@ -6,11 +6,12 @@ import { FavService } from '../../services/fav.service';
 import { FavModel } from '../../Models/fav-model';
 import { UserModel } from '../../Models/user-model';
 import { FavDtoModel } from '../../Models/fav-dto-model';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, FormComponent],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css'
 })
@@ -21,23 +22,12 @@ export class QuizComponent {
     showHideAnswer: boolean = false
     selectedQuiz: QuizModel = {} as QuizModel
 
-
-    
-
     constructor (private quizService: QuizService, private favService: FavService) {}
 
     ngOnInit() {
       this.quizService.GetAll().subscribe((response: QuizModel[]) => {
       this.AllQuestions = response; 
-
-      //console.log("QUESTIONS " + this.AllQuestions[0]);
       })
-
-      //this.favService.GetAll().subscribe((response: FavModel[]) => {
-
-  
-        //console.log("Faves " + response);
-        //})
 
     }
 
@@ -47,27 +37,25 @@ export class QuizComponent {
       this.quizService.DeleteQuestion(q).subscribe()
     }
 
-    AddQuestion(q: QuizModel):void {
-      this.AllQuestions.push(q)
-    };
-
     DisplayAnswer(q: QuizModel){
       this.selectedQuiz = q;
       this.showHideAnswer = !this.showHideAnswer
     }
 
     AddFavorite(q: QuizModel){
-      let fav:FavDtoModel = {} as FavDtoModel
-       fav.quizID = q.id
-       fav.userID = 1
-      this.favService.AddFavorite(fav).subscribe((response: FavDtoModel) => {
-      this.AllFavorites.push(response)
-      })
 
-     
-  
-      };
-     }
+      // update database
+      let fav:FavDtoModel = {} as FavDtoModel
+      fav.quizID = q.id
+      fav.userID = 1
+      this.favService.AddFavorite(fav).subscribe((response: FavDtoModel) => {
+        this.AllFavorites.push(response)
+
+        //confirm by hiding answer
+        this.showHideAnswer = false;
+      })
+    };
+}
 
     
 
