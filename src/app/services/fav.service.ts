@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { QuizModel } from '../Models/quiz-model';
 import { Observable } from 'rxjs';
 import { FavModel } from '../Models/fav-model';
+import { FavDtoModel } from '../Models/fav-dto-model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class FavService {
     return this.http.delete<FavModel> (`${this.url}/Fav/${f.id}`)
   }
 
-  AddFavorite(q: QuizModel):Observable<QuizModel> {
-    return this.http.post<QuizModel> (`${this.url}/Fav`, q)
+  AddFavorite(f:FavDtoModel):Observable<FavDtoModel> {
+    return this.http.post<FavDtoModel> (`${this.url}/Fav`, f)
   }
 }

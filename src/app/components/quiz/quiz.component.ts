@@ -4,6 +4,8 @@ import { QuizModel } from '../../Models/quiz-model';
 import { QuizService } from '../../services/quiz.service';
 import { FavService } from '../../services/fav.service';
 import { FavModel } from '../../Models/fav-model';
+import { UserModel } from '../../Models/user-model';
+import { FavDtoModel } from '../../Models/fav-dto-model';
 
 @Component({
   selector: 'app-quiz',
@@ -15,11 +17,12 @@ import { FavModel } from '../../Models/fav-model';
 export class QuizComponent {
     AllQuestions: QuizModel[] = [];
     QuestionForm: QuizModel = {} as QuizModel
-
+    AllFavorites: FavDtoModel[] = []
     showHideAnswer: boolean = false
     selectedQuiz: QuizModel = {} as QuizModel
 
-    @Output() createEvent = new EventEmitter<FavModel>();
+
+    
 
     constructor (private quizService: QuizService, private favService: FavService) {}
 
@@ -27,14 +30,14 @@ export class QuizComponent {
       this.quizService.GetAll().subscribe((response: QuizModel[]) => {
       this.AllQuestions = response; 
 
-      console.log("QUESTIONS " + this.AllQuestions[0]);
+      //console.log("QUESTIONS " + this.AllQuestions[0]);
       })
 
-      this.favService.GetAll().subscribe((response: FavModel[]) => {
+      //this.favService.GetAll().subscribe((response: FavModel[]) => {
 
   
-        console.log("Faves " + response);
-        })
+        //console.log("Faves " + response);
+        //})
 
     }
 
@@ -53,14 +56,18 @@ export class QuizComponent {
       this.showHideAnswer = !this.showHideAnswer
     }
 
-    // AddFavorite(q: FavModel){
-    //   this.favService.AddFavorite(q).subscribe((fave : FavModel) => {
-    //     this.createEvent.emit(fave);
-    //   });
-    // }
+    AddFavorite(q: QuizModel){
+      let fav:FavDtoModel = {} as FavDtoModel
+       fav.quizID = q.id
+       fav.userID = 1
+      this.favService.AddFavorite(fav).subscribe((response: FavDtoModel) => {
+      this.AllFavorites.push(response)
+      })
 
-    // AddOrder():void {
-    //   this.orderService.addOrder(this.formOrder).subscribe((response:Order) => {
-    //     this.createEvent.emit(response);
-    //   } )
-}
+     
+  
+      };
+     }
+
+    
+
