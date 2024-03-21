@@ -1,0 +1,26 @@
+<h2>Study Questions</h2>
+
+<ol>
+    @for (q of AllQuestions; track q.id) {
+      
+        <li><button onclick="displayanswer = !displayanswer">{{q.question}}</button>
+        
+        @if( displayanswer == true) {
+            <br/>
+            {{q.answer}}
+            
+        }
+        
+    </li>
+}
+
+
+
+
+
+
+
+
+
+    
+</ol>
