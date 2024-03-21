@@ -3,24 +3,18 @@
 <ol>
     @for (q of AllQuestions; track q.id) {
       
-        <li><button onclick="displayanswer = !displayanswer">{{q.question}}</button>
-        
-        @if( displayanswer == true) {
-            <br/>
-            {{q.answer}}
-            
-        }
-        
-    </li>
-}
+        <!-- <li><button onclick="displayanswer = !displayanswer">{{q.question}}</button> -->
+        <li> {{q.question}} <button (click)="DisplayAnswer(q)"> See/Hide Answer </button> 
+        <br/>
+        </li>
+        <!-- <li> {{q.question}} <button (click)="DisplayAnswer(q)"> {{displayanswer ? 'Hide Answer' : 'See Answer'}}</li> -->
 
 
-
-
-
-
-
-
-
-    
+    }
 </ol>
+
+@if( showHideAnswer == true) {
+    <hr>
+    <p>Answer: {{selectedQuiz.answer}}</p>
+    <button (click)="AddFavorite(selectedQuiz)">Save Me</button>
+}
