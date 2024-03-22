@@ -20,11 +20,8 @@ export class FormComponent {
   @Output() createEvent = new EventEmitter<QuizModel>();
 
   addQuiz():void {
-
-    this.quizPage.AllQuestions.push(this.newQuiz); // update page
-
     this.quizService.AddQuestion(this.newQuiz).subscribe((response : QuizModel) => {
-      console.log(response);
+      //console.log(response);
       this.createEvent.emit(response);
     })
   }

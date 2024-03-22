@@ -1,4 +1,4 @@
 export interface FavDtoModel {
-    userID: number;
+    userID: string;
     quizID: number;
 }

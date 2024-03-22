@@ -22,7 +22,8 @@ export class FavService {
     return this.http.delete<FavModel> (`${this.url}/Fav/${f.id}`)
   }
 
-  AddFavorite(f:FavDtoModel):Observable<FavDtoModel> {
-    return this.http.post<FavDtoModel> (`${this.url}/Fav`, f)
+  AddFavorite(f:FavDtoModel):Observable<FavModel> {
+    console.log(f)
+    return this.http.post<FavModel> (`${this.url}/Fav`, f)
   }
 }
