@@ -38,9 +38,6 @@ export class QuizComponent {
         //if login fails, it will return null.
         this.loggedIn = (userResponse != null);
 
-        if (!this.loggedIn){
-          this.router.navigate(["/"]); // send user to login screen
-        }
 
       });
     }
@@ -65,7 +62,7 @@ export class QuizComponent {
       // update database
       let fav:FavDtoModel = {} as FavDtoModel
       fav.quizID = q.id
-      fav.userID = this.user.authToken
+      fav.userID = this.user.id
       console.log(fav)
       this.favService.AddFavorite(fav).subscribe((response: FavModel) => {
         this.AllFavorites.push(response)
@@ -73,6 +70,10 @@ export class QuizComponent {
         this.showHideAnswer = false;
       })
     };
+    signOut(): void {
+      this.socialAuthServiceConfig.signOut();
+      this.router.navigate([""]); 
+    }
 }
 
     

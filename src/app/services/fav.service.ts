@@ -14,8 +14,8 @@ export class FavService {
 
   url: string = "https://localhost:7143/api"
 
-  GetAll():Observable<FavModel[]> {
-    return this.http.get<FavModel[]>(`${this.url}/Fav`)
+  GetbyID(userID: string):Observable<FavModel[]> {
+    return this.http.get<FavModel[]>(`${this.url}/Fav/${userID}`)
   }
 
   DeleteFav(f: FavModel):Observable<FavModel> {

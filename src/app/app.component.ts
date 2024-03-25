@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { FormComponent } from './components/form/form.component';
 import { LoginComponent } from './components/login/login.component';
@@ -17,7 +17,7 @@ export class AppComponent {
   loggedIn: boolean = false;
   user: SocialUser = {} as SocialUser;
 
-  constructor (private socialAuthServiceConfig: SocialAuthService) {}
+  constructor (private socialAuthServiceConfig: SocialAuthService, private router: Router) {}
 
   ngOnInit() {
     this.socialAuthServiceConfig.authState.subscribe((userResponse: SocialUser) => {
@@ -27,8 +27,9 @@ export class AppComponent {
     });
   }
 
-  signOut(): void {
-    this.socialAuthServiceConfig.signOut();
-  }
+  // signOut(): void {
+  //   this.socialAuthServiceConfig.signOut();
+  //   this.router.navigate(["/"]); 
+  //}
 
 }

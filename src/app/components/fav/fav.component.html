@@ -1,1 +1,20 @@
-<p>fav works!</p>
+<h2>Favorite Study Questions</h2>
+<ol>
+    @for (f of AllFavorites; track f.id) {
+      
+       
+        <li> {{f.quiz.question}} <button (click)="DisplayAnswer(f)"> See/Hide Answer </button> 
+        <br/>
+
+    }
+</ol>
+
+@if( showHideAnswer == true) {
+    <hr>
+    <p>Answer: {{selectedFav.quiz.answer}}</p>
+    <br>
+    <button (click)="deleteFav(selectedFav.quiz.id)">Remove Question from Favorites</button>
+    
+}
+
+

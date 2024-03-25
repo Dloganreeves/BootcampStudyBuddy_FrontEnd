@@ -1,3 +1,7 @@
+<!-- calls our log out method -->
+<button class="btn btn-outline-dark" (click)="signOut()">
+    Sign Out
+  </button>
 
 
 <h2>Study Questions</h2>
@@ -23,3 +27,5 @@
 
 
 <app-form (createEvent)="addQuiz($event)"></app-form>
+
+<router-outlet></router-outlet>

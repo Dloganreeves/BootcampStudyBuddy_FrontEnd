@@ -22,7 +22,9 @@ export class LoginComponent {
       this.user = userResponse;
       //if login fails, it will return null.
       this.loggedIn = (userResponse != null);
-      this.router.navigate(["questions"]); 
+      if(this.loggedIn == true) {
+        this.router.navigate(["questions"]); 
+      }
     });
   }
   //login component doesn't account for logging out.
