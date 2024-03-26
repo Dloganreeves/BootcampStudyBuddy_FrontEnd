@@ -1,3 +1,4 @@
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 <h2>Favorite Study Questions</h2>
 @if(!loggedIn){
     <hr style="border: 1px dashed black;">
@@ -9,8 +10,9 @@
       
        
         <li style="margin-bottom: 10px;"> {{f.quiz.question}} <br>
-            <!-- <button (click)="DisplayAnswer(f)"> See/Hide Answer </button> -->
-            <button (click)="DisplayAnswer(f)">{{AllQuestionsButton[f.quiz.id] ? 'Hide Answer': 'Show Answer'}}</button></li>
+
+            @if(AllQuestionsButton[f.quiz.id] == true){ <button (click)="DisplayAnswer(f)" style="background-color: orange;" >Hide Answer</button> }
+            @else { <button (click)="DisplayAnswer(f)">Show Answer</button> }
     }
 </ol>
 

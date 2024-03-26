@@ -10,7 +10,11 @@
                 <ol>
                     @for (q of AllQuestions; track q.id) {
                         <li style="margin-bottom: 10px;"> {{q.question}} <br>
-                            <button (click)="DisplayAnswer(q)">{{AllQuestionsButton[q.id] ? 'Hide Answer': 'Show Answer'}}</button></li>
+                            @if(AllQuestionsButton[q.id] == true){ <button (click)="DisplayAnswer(q)" style="background-color: orange;" >Hide Answer</button> }
+                            @else { <button (click)="DisplayAnswer(q)">Show Answer</button> }
+
+                        </li>
+
                     }
                 </ol>  
             </td>
