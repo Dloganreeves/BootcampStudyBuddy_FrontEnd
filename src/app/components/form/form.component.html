@@ -1,11 +1,11 @@
-<h1>New Study Question</h1>
-<div>
+<h2>New Question</h2>
+<div class="form">
 
     <label for="question">Question</label>
-    <input id="question" type="text" [(ngModel)]="newQuiz.question" />
+    <input id="question" type="text" [(ngModel)]="newQuiz.question" style="margin-bottom: 10px;"/>
     <br>
     <label for="answer">Answer</label>
-    <input id="answer" type="text" [(ngModel)]="newQuiz.answer" />
+    <input id="answer" type="text" [(ngModel)]="newQuiz.answer" style="margin-bottom: 20px;"/>
     <br>
     <button (click)="addQuiz()">Add</button>
 </div>

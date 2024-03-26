@@ -1,31 +1,44 @@
-<!-- calls our log out method -->
-<button class="btn btn-outline-dark" (click)="signOut()">
-    Sign Out
-  </button>
+@if(loggedIn){
+    <h2>Study Questions</h2>
+    <hr style="border: 1px dashed black;">
+    <table>
+        <th style="width: 60%; text-align: left;">Questions</th>
+        <th>Answers</th>
 
+        <tr>
+            <td>
+                <ol>
+                    @for (q of AllQuestions; track q.id) {
+                        <li style="margin-bottom: 10px;"> {{q.question}} <br>
+                            <button (click)="DisplayAnswer(q)">{{AllQuestionsButton[q.id] ? 'Hide Answer': 'Show Answer'}}</button></li>
+                    }
+                </ol>  
+            </td>
 
-<h2>Study Questions</h2>
+            <td>       
+                @if( showHideAnswer == true) {
+                    <p style="text-align: center; text-decoration: underline;">{{selectedQuiz.answer}}</p>
+                    <button (click)="AddFavorite(selectedQuiz)" style="display: block; margin: 0 auto;">Save to favorites</button>
+                }
+                @else {
+                    <p style="text-align: center;">Choose a question to get started!</p>
+                }
+            </td>
 
-<ol>
-    @for (q of AllQuestions; track q.id) {
-      
-        <!-- <li><button onclick="displayanswer = !displayanswer">{{q.question}}</button> -->
-        <li> {{q.question}} <button (click)="DisplayAnswer(q)"> See/Hide Answer </button> 
-        <br/>
-        </li>
-        <!-- <li> {{q.question}} <button (click)="DisplayAnswer(q)"> {{displayanswer ? 'Hide Answer' : 'See Answer'}}</li> -->
+        </tr>
+    </table>
 
+    <hr style="border: 1px dashed black;">
 
-    }
-</ol>
+    <app-form (createEvent)="addQuiz($event)"></app-form>
 
-@if( showHideAnswer == true) {
-    <hr>
-    <p>Answer: {{selectedQuiz.answer}}</p>
-    <button (click)="AddFavorite(selectedQuiz)">Save to favorites</button>
+    <hr style="margin-top: 20px;">
+    <!-- calls our log out method -->
+    <button style="display: block; margin: 10px 10px 10px auto;" (click)="signOut()">Sign Out</button>
 }
-
-
-<app-form (createEvent)="addQuiz($event)"></app-form>
+@else {
+    <h3>Please login again to continue</h3>
+    <asl-google-signin-button></asl-google-signin-button>
+}
 
 <router-outlet></router-outlet>

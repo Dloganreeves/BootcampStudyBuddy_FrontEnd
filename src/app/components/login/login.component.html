@@ -1,6 +1,14 @@
-<h1>Login</h1>
+<h2 style="text-align: center;">Welcome to Study Buddy!</h2>
+<h3 style="text-align: center;">Login to get started.</h3>
+
 @if (!loggedIn) {
-    <!-- Custom component that handles log in -->
-    <asl-google-signin-button></asl-google-signin-button>
+
+    <table class="login-table">
+        <tr>
+            <td><p style="text-align: center; margin-right: 10px;">Continue with Google &#10132;</p></td>
+            <td><asl-google-signin-button class="vertical-center" ></asl-google-signin-button></td>
+        </tr>
+    </table>
+
 }
   

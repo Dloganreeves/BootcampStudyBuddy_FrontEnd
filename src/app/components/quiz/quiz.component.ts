@@ -7,17 +7,18 @@ import { FavModel } from '../../Models/fav-model';
 import { FavDtoModel } from '../../Models/fav-dto-model';
 import { FormComponent } from '../form/form.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [FormsModule, FormComponent, RouterOutlet, RouterLink],
+  imports: [FormsModule, FormComponent, RouterOutlet, RouterLink, GoogleSigninButtonModule],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css'
 })
 export class QuizComponent {
     AllQuestions: QuizModel[] = [];
+    AllQuestionsButton: boolean[] = [];
     QuestionForm: QuizModel = {} as QuizModel
     AllFavorites: FavModel[] = []
     showHideAnswer: boolean = false
@@ -25,21 +26,36 @@ export class QuizComponent {
     user: SocialUser = {} as SocialUser;
     loggedIn: boolean = false;
   
-  
     constructor (private quizService: QuizService, private favService: FavService, 
       private socialAuthServiceConfig: SocialAuthService, private router: Router) {}
 
     ngOnInit() {
+
       this.quizService.GetAll().subscribe((response: QuizModel[]) => {
         this.AllQuestions = response; 
       })
+
+      this.AllQuestionsButton.forEach(element => {
+        element = false;
+      });
+
       this.socialAuthServiceConfig.authState.subscribe((userResponse: SocialUser) => {
+        
         this.user = userResponse;
+
         //if login fails, it will return null.
         this.loggedIn = (userResponse != null);
 
+        console.log(">>> QUIZ INIT SocialUser response: " + userResponse.response)
+
+        if(this.loggedIn == false) {
+          console.log(">>> Return to LOGIN")
+          this.router.navigate([""]); 
+        }
+
 
       });
+      console.log(">>> QUIZ INIT loggedIn? " + (this.user.response))
     }
 
     deleteQuestion(q: QuizModel) {
@@ -55,6 +71,14 @@ export class QuizComponent {
     DisplayAnswer(q: QuizModel){
       this.selectedQuiz = q;
       this.showHideAnswer = !this.showHideAnswer
+
+      //reset other buttons
+      // this.AllQuestionsButton.forEach(element => {
+      //   element = false;
+      // });
+
+      let showHide = this.AllQuestionsButton[q.id];
+      this.AllQuestionsButton[q.id] = !showHide
     }
 
     AddFavorite(q: QuizModel){

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FavModel } from '../../Models/fav-model';
 import { FavService } from '../../services/fav.service';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-fav',
   standalone: true,
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet, GoogleSigninButtonModule],
   templateUrl: './fav.component.html',
   styleUrl: './fav.component.css'
 })

@@ -1,16 +1,21 @@
 <h2>Favorite Study Questions</h2>
+@if(!loggedIn){
+    <hr style="border: 1px dashed black;">
+    <h3>Please login again to continue</h3>
+    <asl-google-signin-button></asl-google-signin-button>
+}
 <ol>
     @for (f of AllFavorites; track f.id) {
       
        
-        <li> {{f.quiz.question}} <button (click)="DisplayAnswer(f)"> See/Hide Answer </button> 
-        <br/>
+        <li style="margin-bottom: 10px;"> {{f.quiz.question}} <br>
+            <button (click)="DisplayAnswer(f)"> See/Hide Answer </button>
 
     }
 </ol>
 
 @if( showHideAnswer == true) {
-    <hr>
+    <hr style="border: 1px dashed black;">
     <p>Answer: {{selectedFav.quiz.answer}}</p>
     <br>
     <button (click)="deleteFav(selectedFav.quiz.id)">Remove Question from Favorites</button>

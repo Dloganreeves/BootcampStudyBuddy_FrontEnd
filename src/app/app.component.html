@@ -1,11 +1,13 @@
 @if (loggedIn) {
-  <a style= "cursor: pointer" routerLink="/">Home</a>
-    <br>
-    <a style= "cursor: pointer" routerLink="/questions">Question List</a>
-    <br>
-    <a style= "cursor: pointer" routerLink="/fav">Favorite Questions</a>
-    <br>
-  
+
+  <table>
+    <tr>
+      <td><a style= "cursor: pointer; margin-right: 15px;" routerLink="/">Home</a></td>
+      <td><a style= "cursor: pointer; margin-right: 15px;" routerLink="/questions">Questions</a></td>
+      <td><a style= "cursor: pointer" routerLink="/fav">Favorites</a></td>
+    </tr>
+  </table>
+  <hr>
 }
 
 
