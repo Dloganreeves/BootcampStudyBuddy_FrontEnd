@@ -9,14 +9,14 @@
       
        
         <li style="margin-bottom: 10px;"> {{f.quiz.question}} <br>
-            <button (click)="DisplayAnswer(f)"> See/Hide Answer </button>
-
+            <!-- <button (click)="DisplayAnswer(f)"> See/Hide Answer </button> -->
+            <button (click)="DisplayAnswer(f)">{{AllQuestionsButton[f.quiz.id] ? 'Hide Answer': 'Show Answer'}}</button></li>
     }
 </ol>
 
 @if( showHideAnswer == true) {
     <hr style="border: 1px dashed black;">
-    <p>Answer: {{selectedFav.quiz.answer}}</p>
+    <p>Answer: <span style="text-decoration: underline;">{{selectedFav.quiz.answer}}</span></p>
     <br>
     <button (click)="deleteFav(selectedFav.quiz.id)">Remove Question from Favorites</button>
     

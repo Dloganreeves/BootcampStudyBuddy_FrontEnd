@@ -14,6 +14,7 @@ import { GoogleSigninButtonModule, SocialAuthService, SocialUser } from '@abacri
 
 export class FavComponent {
   AllFavorites: FavModel[] = []
+  AllQuestionsButton: boolean[] = [];
   loggedIn: boolean = false;
   user: SocialUser = {} as SocialUser;
   selectedFav: FavModel = {} as FavModel
@@ -37,10 +38,17 @@ export class FavComponent {
         
     })
 
+    this.AllQuestionsButton.forEach(element => {
+      element = false;
+    });
+
   }
   DisplayAnswer(f: FavModel){
-   this.selectedFav = f;
+    this.selectedFav = f;
     this.showHideAnswer = !this.showHideAnswer
+
+    let showHide = this.AllQuestionsButton[f.quiz.id];
+    this.AllQuestionsButton[f.quiz.id] = !showHide
   }
   deleteFav(id: number) {
     let deleteFavItem = this.AllFavorites.find(f => f.quiz.id == id)
